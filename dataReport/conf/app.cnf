@@ -1,0 +1,11 @@
+db_user = jiemin
+db_pwd = jiemin2017
+db_host = 127.0.0.1
+db_port = 3306
+db_name = jiemin
+mail_from_user = wangjiemin@ultrapower.com.cn
+mail_pwd = jiemin0228@
+mail_host = mail.ultrapower.com.cn
+//mail_port = 587
+mail_to_user = wangjiemin@ultrapower.com.cn
+mail_cc_user = wangjiemin@ultrapower.com.cn

@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"golang_Learn/dataReport/gettime"
+	"go_script//dataReport/gettime"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"

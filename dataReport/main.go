@@ -1,12 +1,13 @@
 package main
 
 import (
-	"golang_Learn/dataReport/compress"
-	"golang_Learn/dataReport/execl"
-	db "golang_Learn/dataReport/models"
-	mail "golang_Learn/dataReport/sendmail"
 	"log"
 	"os"
+
+	"go_script/dataReport/compress"
+	"go_script/dataReport/execl"
+	db "go_script/dataReport/models"
+	mail "go_script/dataReport/sendmail"
 
 	"github.com/WangJiemin/gocomm"
 )

@@ -8,6 +8,7 @@ import (
 
 func Execl_install(excelPath string, dict map[string]string) {
 	xlsx := excelize.NewFile()
+	//xlsx.NewSheet()
 	for k, v := range dict {
 		//fmt.Println(k, v)
 		xlsx.SetCellValue("Sheet1", k, v)

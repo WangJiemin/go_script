@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"golang_Learn/dataReport/gettime"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -62,7 +63,8 @@ func Inforall_dataReport(tables_name, project_id string) map[string]string {
 	*/
 	taskinfos := []*TASKINFOS{}
 	//dic := TaskLogs()
-	db124.Raw(fmt.Sprintf("select a.task_id, a.`name`, a.entry_link, a.owner_name, a.create_time, sum(c.page_count) as page_count, sum(c.collected_count) as collected_count, sum(c.insert_count) as insert_count, b.count from task_infos a, info_temp b left join task_logs c on b.task_id=c.task_id where a.task_id=b.task_id and a.`status`!=2 and a.is_start=1 and a.project_id= '%s' group by b.task_id", project_id)).Scan(&taskinfos)
+	t1, t2 := gettime.GetNowTime()
+	db124.Raw(fmt.Sprintf("select a.task_id, a.`name`, a.entry_link, a.owner_name, a.create_time, sum(c.page_count) as page_count, sum(c.collected_count) as collected_count, sum(c.insert_count) as insert_count, b.count from task_infos a, info_temp b left join task_logs c on b.task_id=c.task_id where a.task_id=b.task_id and a.`status`!=2 and a.is_start=1 and a.project_id= '%s' and c.update_time >= '%s' and c.update_time <= '%s' group by b.task_id", project_id, t1, t2)).Scan(&taskinfos)
 	Dict := map[string]string{}
 	for key, values := range taskinfos {
 		//fmt.Println(values)

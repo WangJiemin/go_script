@@ -1,14 +1,14 @@
 作者:WangJiemin(Jamin.Wang)-王杰民
 
-版本:示例版本 v0.1
+版本:示例版本 v0.1.1
 
 程序介绍:
 
     实现了获取数据生成EXCEL数据报表功能
 
     功能全部用Golang的基础知识实现一个简单的模块化编程的示例
-
-    注意:只实现了"生成EXCEL"和"发送Email"
+	
+	
 
 程序结构:
 
@@ -28,6 +28,9 @@ dataReport/
 	├── execl    # EXCEL目录
 	│	└── execl.go    # 生成EXCEL
 	│
+	├── gettime    # 时间目录
+	│	└── getnowtime.go    # 获取当前时间与前一天的时间
+	│
 	├── models   # models目录("操作数据库")
 	│	├──	models.go 	# 定义数据库结构文件
 	│	└── datareport.go # 数据库操作文件
@@ -40,7 +43,10 @@ dataReport/
 程序版本/
 
 	├── v0.1版本
-	│	└── 实现从MySQL数据库中获取数据生成EXCEL表发送到邮箱里(现实)
+	│	└── 实现从MySQL数据库中获取数据生成EXCEL表发送到邮箱里(上线)
+	│
+	├── v0.1.1版本
+	│	└── 实现从MySQL数据库中获取当前时间和一天前的数据生成EXCEL表发送到邮箱里(上线)
 	│
 	├── v0.2版本
 	│       └── 实现把生成的EXCEL合并成一个EXCEL。一个EXCEL中包含不同的所有表(未实现,已有代码测试阶段)

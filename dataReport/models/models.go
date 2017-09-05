@@ -1,9 +1,5 @@
 package models
 
-const (
-	TimeFormart = "2006-01-02 15:04:05"
-)
-
 type INFOTEMP struct {
 	TASKID          string `gorm:"type:varchar(128);"`
 	COUNT           int

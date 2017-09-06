@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"go_script//dataReport/gettime"
+	"go_script/dataReport/gettime"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -62,9 +62,10 @@ func Inforall_dataReport(tables_name, project_id string) map[string]string {
 		}
 	*/
 	taskinfos := []*TASKINFOS{}
-	//dic := TaskLogs()
-	t1, t2 := gettime.GetNowTime()
-	db124.Raw(fmt.Sprintf("select a.task_id, a.`name`, a.entry_link, a.owner_name, a.create_time, sum(c.page_count) as page_count, sum(c.collected_count) as collected_count, sum(c.insert_count) as insert_count, b.count from task_infos a, info_temp b left join task_logs c on b.task_id=c.task_id where a.task_id=b.task_id and a.`status`!=2 and a.is_start=1 and a.project_id= '%s' and c.update_time >= '%s' and c.update_time <= '%s' group by b.task_id", project_id, t1, t2)).Scan(&taskinfos)
+	dic := TaskLogs()
+	//t1, t2 := gettime.GetNowTime()
+	//db124.Raw(fmt.Sprintf("select a.task_id, a.`name`, a.entry_link, a.owner_name, a.create_time, sum(c.page_count) as page_count, sum(c.collected_count) as collected_count, sum(c.insert_count) as insert_count, b.count from task_infos a, info_temp b left join task_logs c on b.task_id=c.task_id where a.task_id=b.task_id and a.`status`!=2 and a.is_start=1 and a.project_id= '%s' and c.update_time >= '%s' and c.update_time <= '%s' group by b.task_id", project_id, t1, t2)).Scan(&taskinfos)
+	db124.Raw(fmt.Sprintf("select a.task_id, a.`name`, a.entry_link, a.owner_name, a.create_time, b.count from task_infos a, info_temp b where a.task_id=b.task_id and a.`status`!=2 and a.is_start=1 and a.project_id= '%s' group by b.task_id", project_id)).Scan(&taskinfos)
 	Dict := map[string]string{}
 	for key, values := range taskinfos {
 		//fmt.Println(values)
@@ -85,20 +86,18 @@ func Inforall_dataReport(tables_name, project_id string) map[string]string {
 		Dict[StringStr_C] = values.ENTRY_LINK
 		Dict[StringStr_D] = values.OWNER_NAME
 		Dict[StringStr_E] = values.CREATE_TIME
-		Dict[StringStr_F] = values.PAGE_COUNT
-		Dict[StringStr_G] = values.COLLECTED_COUNT
-		Dict[StringStr_H] = values.INSERT_COUNT
+		//Dict[StringStr_F] = values.PAGE_COUNT
+		//Dict[StringStr_G] = values.COLLECTED_COUNT
+		//Dict[StringStr_H] = values.INSERT_COUNT
 		Dict[StringStr_I] = values.COUNT
 
 		//fmt.Printf("F:\t%s\tG:\t%s\tH:\t%s\tI:\t%s\t", Dict[StringStr_F], Dict[StringStr_G], Dict[StringStr_H], Dict[StringStr_I])
-		/*
-			if dic[values.TASK_ID] != nil {
-				Dict[StringStr_G] = dic[values.TASK_ID].COLLECTED_COUNT
-				Dict[StringStr_H] = dic[values.TASK_ID].INSERT_COUNT
-				Dict[StringStr_I] = dic[values.TASK_ID].PAGE_COUNT
-			}
-			fmt.Printf("F:\t%s\tG:\t%s\tH:\t%s\tI:\t%s\t", Dict[StringStr_F], Dict[StringStr_G], Dict[StringStr_H], Dict[StringStr_I])
-		*/
+		if dic[values.TASK_ID] != nil {
+			Dict[StringStr_G] = dic[values.TASK_ID].PAGE_COUNT
+			Dict[StringStr_H] = dic[values.TASK_ID].COLLECTED_COUNT
+			Dict[StringStr_I] = dic[values.TASK_ID].INSERT_COUNT
+		}
+		//fmt.Printf("F:\t%s\tG:\t%s\tH:\t%s\tI:\t%s\t", Dict[StringStr_F], Dict[StringStr_G], Dict[StringStr_H], Dict[StringStr_I])
 	}
 
 	return Dict
@@ -137,24 +136,14 @@ func InfoallChayi(tables_name, project_id string) map[string]string {
 	return Dict
 }
 
-/*
 func TaskLogs() map[string]*TASKLOGS {
+	t1, t2 := gettime.GetNowTime()
 	tasklogs := []*TASKLOGS{}
-	db124.Table("task_logs").Select("task_id,SUM(collected_count),SUM(insert_count),SUM(page_count)").Group("task_id").Scan(&tasklogs)
+	db124.Table("task_logs").Where("update_time >= ? AND update_time <= ?", t1, t2).Select("task_id,sum(page_count) as page_count, sum(collected_count) as collected_count, sum(insert_count) as insert_count").Group("task_id").Scan(&tasklogs)
 	Dict := map[string]*TASKLOGS{}
 	for _, v := range tasklogs {
 		Dict[v.TASK_ID] = v
 	}
+	//fmt.Printf("loglent %d", len(Dict))
 	return Dict
 }
-
-func TaskLogs() map[string]*TASKINFOS {
-	taskinfos := []*TASKINFOS{}
-	db124.Table("task_logs").Select("task_id,SUM(collected_count),SUM(insert_count),SUM(page_count)").Group("task_id").Scan(&taskinfos)
-	Dict := map[string]*TASKINFOS{}
-	for _, v := range taskinfos {
-		Dict[v.TASK_ID] = v
-	}
-	return Dict
-}
-*/

@@ -1,11 +1,11 @@
 package models
 
 type INFOTEMP struct {
-	TASKID          string `gorm:"type:varchar(128);"`
-	COUNT           int
-	COLLECTED_COUNT int
-	INSERT_COUNT    int
-	PAGE_COUNT      int
+	TASKID string `gorm:"type:varchar(128);"`
+	COUNT  int
+	//COLLECTED_COUNT int
+	//INSERT_COUNT    int
+	//PAGE_COUNT      int
 	//COUNT_NULL      int
 }
 
@@ -74,11 +74,11 @@ type TASKINFOS struct {
 	//REMARKS           string
 	//CHANNEL           string
 	//NEED_SREENSHOT    int
-	ENTRY_LINK      string
-	PAGE_COUNT      string
-	COLLECTED_COUNT string
-	INSERT_COUNT    string
-	COUNT           string
+	ENTRY_LINK string
+	//PAGE_COUNT      string
+	//COLLECTED_COUNT string
+	//INSERT_COUNT    string
+	COUNT string
 }
 
 type TASKLOGS struct {
@@ -87,9 +87,9 @@ type TASKLOGS struct {
 	TASK_ID string
 	//TASK_NAME       string
 	//PROJECT_ID      string
+	PAGE_COUNT      string
 	COLLECTED_COUNT string
 	INSERT_COUNT    string
-	PAGE_COUNT      string
 	//SERVICE_NAME    string
 	//START_TIME      string
 	//FINISH_TIME     string

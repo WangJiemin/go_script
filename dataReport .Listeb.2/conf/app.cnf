@@ -1,0 +1,16 @@
+db_user_s = funbird
+db_pwd_s = funbird2017
+db_host_s = 192.168.95.186
+db_port_s = 3306
+db_name_s = funbird_storage
+db_user_d = funbird
+db_pwd_d = funbird2017
+db_host_d = 192.168.95.186
+db_port_d = 3306
+db_name_d = funbird_storage
+mail_from_user = wangjiemin@ultrapower.com.cn
+mail_pwd = jiemin0228@
+mail_host = mail.ultrapower.com.cn
+//mail_port = 587
+mail_to_user = wangjiemin@ultrapower.com.cn
+mail_cc_user = wangjiemin@ultrapower.com.cn

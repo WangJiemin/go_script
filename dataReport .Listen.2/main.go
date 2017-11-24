@@ -2,10 +2,10 @@ package main
 
 import (
 	//"fmt"
-	"golang_Learn/dataReport/compress"
-	"golang_Learn/dataReport/execl"
-	db "golang_Learn/dataReport/models"
-	mail "golang_Learn/dataReport/sendmail"
+	"funbird-dataReport/compress"
+	"funbird-dataReport/execl"
+	db "funbird-dataReport/models"
+	mail "funbird-dataReport/sendmail"
 	"log"
 	"os"
 

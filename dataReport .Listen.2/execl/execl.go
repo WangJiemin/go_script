@@ -2,7 +2,7 @@ package execl
 
 import (
 	"fmt"
-	"golang_Learn/dataReport/gettime"
+	"funbird-dataReport/gettime"
 	"log"
 	"time"
 

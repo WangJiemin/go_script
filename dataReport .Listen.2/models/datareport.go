@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"golang_Learn/dataReport/gettime"
+	"funbird-dataReport/gettime"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -53,7 +53,7 @@ func Initialize(config map[string]string) {
 func INFO_TEMP(project_id string) {
 	db186.Raw("TRUNCATE TABLE funbird_storage.info_temp").Row()
 	taskinfos := []*TASKINFOS{}
-	db124.Table("funbird.task_infos").Where("project_id = ?", project_id).Scan(&taskinfos)
+	db124.Table("funbird.task_infos").Where("project_id = ?", project_id).Where("is_start = ?", 1).Where("status != ?", 2).Scan(&taskinfos)
 	for _, values := range taskinfos {
 		data := INFOTEMP{}
 		data.TASKID = values.TASK_ID

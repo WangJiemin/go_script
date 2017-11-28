@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"funbird-dataReport/gettime"
 	"log"
-	"time"
+	//"time"
 
 	"github.com/xuri/excelize"
 )
 
 func Execl_install(excelPath string, dict map[string]string) {
-	now := time.Now().Format("20060102")
+	//now := time.Now().Format("20060102")
+	now := gettime.YESTERDAY()
 	d1, d2 := gettime.TWODAYS()
 
 	xlsx := excelize.NewFile()

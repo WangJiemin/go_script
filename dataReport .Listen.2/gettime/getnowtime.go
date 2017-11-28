@@ -39,12 +39,12 @@ func TWODAYS() (one, two string) {
 	NowTime := time.Now()
 	//fmt.Println(NowTime)
 
-	diff_one, err := time.ParseDuration("-24h")
+	diff_one, err := time.ParseDuration("-48h")
 	if err != nil {
 		log.Println(err)
 	}
 
-	diff_two, err := time.ParseDuration("-48h")
+	diff_two, err := time.ParseDuration("-72h")
 	if err != nil {
 		log.Println(err)
 	}

@@ -1,0 +1,8 @@
+db_user = jiemin
+db_pwd = jiemin
+db_host = 127.0.01
+db_port = 3306
+db_name = jiemin
+ka_host = 127.0.0.1:9092,127.0.0.1:9092,127.0.0.1:9092
+//ka_host = 127.0.0.1:9092
+ka_topic = test

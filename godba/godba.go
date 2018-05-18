@@ -1,6 +1,5 @@
 package main
 
-
 import (
 	"flag"
 	"fmt"
@@ -939,21 +938,11 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 		}
 
 		pic += Colorize(".==========================================================================================================.\n", green, "", "", "")
-		//pic += Colorize("|", green, "", "", "") + " " + Colorize("COOOGC8GCCCC", yellow, "", "", "y") + " " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + " " + Colorize("GO@888880C   CGCCCCG", yellow, "", "", "y") + " " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + " " + Colorize("GCCCGO00800GCCCCCG0@C", yellow, "", "", "y") + "" + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + " " + Colorize("CCCCCCCCCCCCCCCG880OGGCCCCCCCGGC", yellow, "", "", "y") + "   " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "   " + Colorize("CCCCCCCCCCO0GCCCCCCCCCCCCCCCCC", yellow, "", "", "y") + "  " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "   " + Colorize("CCCCCG88CG888888880GCC", yellow, "", "", "y") + "C" + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "  " + Colorize("GCC  CCCCCC", yellow, "", "", "y") + "   G08@@8O88  O8G888   G8GGGO8OCGG08OGG G80CCG88  08GGG08G   " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + " " + Colorize("CO0CCCCCCCCC", yellow, "", "", "y") + "  8808G 8O 8O  G8   C8O   G88G 80 08   G8G   " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "  " + Colorize("CG0800OGCC", yellow, "", "", "y") + "   88CC80   880008C G8CCCO8G   G88G 80 08CCC08C   " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "  " + Colorize("CGGCCCCCCC", yellow, "", "", "y") + "   88   08C0808 G880   G8G80GGO80  088G   " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "   " + Colorize("CGCCCGC", yellow, "", "", "y") + "" + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "" + Colorize("C@8", yellow, "", "", "y") + "   " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "  " + Colorize("|", green, "", "", "") + "\n"
-		//pic += Colorize("|", green, "", "", "") + "   CCCC   " + Colorize("|", green, "", "", "") + "\n"
-		pic += Colorize("|", green, "", "", "") + "Author:" + Colorize("J", green, "", "", "") + "i" + Colorize("e", red, "", "", "") + "M" + Colorize("i", purple, "", "", "") + "n  " + Colorize("|", green, "", "", "") + "\n"
+		pic += Colorize("|", green, "", "", "") + " " + Colorize("Author:", yellow, "", "", "") + " " + Colorize("Created by WangJiemin", red, "", "", "") + Colorize("|", green, "", "", "") + "\n"
+		pic += Colorize("|", green, "", "", "") + " " + Colorize("QQ:", yellow, "", "", "") + " " + Colorize("278667010", red, "", "", "") + Colorize("|", green, "", "", "") + "\n"
+		pic += Colorize("|", green, "", "", "") + " " + Colorize("Email:", yellow, "", "", "") + " " + Colorize("278667010@qq.com", red, "", "", "") + Colorize("|", green, "", "", "") + "\n"
+		pic += Colorize("|", green, "", "", "") + " " + Colorize("Version:", yellow, "", "", "") + " " + Colorize("0.1", red, "", "", "") + Colorize("|", green, "", "", "") + "\n"
+		pic += Colorize("|", green, "", "", "") + " " + Colorize("Function:", yellow, "", "", "") + " " + Colorize("用golang语言重构orzdba", red, "", "", "") + Colorize("|", green, "", "", "") + "\n"
 		pic += Colorize("'=========================================================================================================='\n\n", green, "", "", "")
 		pic += Colorize("HOST: ", red, "", "", "") + Colorize(strings.Replace(second.hostname, "\n", "", -1), yellow, "", "", "") + Colorize("IP: ", red, "", "", "") + Colorize(strings.Replace(second.ip, "\n", "", -1), yellow, "", "", "") + "\n"
 		pic += Colorize("DB  : ", red, "", "", "") + Colorize(second.db, yellow, "", "", "") + "\n"
@@ -992,15 +981,15 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//必打时间time信息
 	if flag_info["time"] == true {
-		title_summit = Colorize("-------- ", dgreen, "", "", "")
+		title_summit = Colorize("---------", dgreen, "", "", "")
 		title_detail = Colorize("  time  |", dgreen, "", "y", "")
 		data_detail = Colorize(getNowTime(), yellow, "", "", "") + Colorize("|", dgreen, "", "", "")
 	}
 
 	//loadavg 信息
 	if flag_info["load"] == true {
-		title_summit += Colorize("-----load-avg---- ", dgreen, "", "", "")
-		title_detail += Colorize("  1m5m   15m |", dgreen, "", "y", "")
+		title_summit += Colorize("----- load-avg -----", dgreen, "", "", "")
+		title_detail += Colorize("  1m    5m    15m  |", dgreen, "", "y", "")
 		// fmt.Println(strings.Repeat(" ", 5-len(floatToString(first.load_1, 2)))+floatToString(first.load_1, 2), floatToString(first.load_1, 2), len(floatToString(first.load_1, 2)))
 		//load 1 min
 		if first.load_1 > first.cpu_core {
@@ -1037,8 +1026,8 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//cpu-usage
 	if flag_info["cpu"] == true {
-		title_summit += Colorize("---cpu-usage--- ", dgreen, "", "", "")
-		title_detail += Colorize("usr sys idl iow|", dgreen, "", "y", "")
+		title_summit += Colorize("------- cpu-usage -------", dgreen, "", "", "")
+		title_detail += Colorize(" usr   sys   idl   iow  |", dgreen, "", "y", "")
 
 		cpu_total1 := first.cpu_usr + first.cpu_nice + first.cpu_sys + first.cpu_idl + first.cpu_iow + first.cpu_irq + first.cpu_softirq
 		cpu_total2 := second.cpu_usr + second.cpu_nice + second.cpu_sys + second.cpu_idl + second.cpu_iow + second.cpu_irq + second.cpu_softirq
@@ -1050,37 +1039,37 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 		//usr
 
 		if usr > 10 {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(usr)))+strconv.Itoa(usr)+" ", red, "", "", "y")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(usr)))+strconv.Itoa(usr)+" ", red, "", "", "y")
 		} else {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(usr)))+strconv.Itoa(usr)+" ", green, "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(usr)))+strconv.Itoa(usr)+" ", green, "", "", "")
 		}
 
 		if sys > 10 {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(sys)))+strconv.Itoa(sys)+" ", red, "", "", "y")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(sys)))+strconv.Itoa(sys)+" ", red, "", "", "y")
 		} else {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(sys)))+strconv.Itoa(sys)+" ", "", "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(sys)))+strconv.Itoa(sys)+" ", "", "", "", "")
 		}
 
 		if 1 != 1 {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(idl)))+strconv.Itoa(idl)+" ", red, "", "", "y")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(idl)))+strconv.Itoa(idl)+" ", red, "", "", "y")
 		} else {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(idl)))+strconv.Itoa(idl)+" ", "", "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(idl)))+strconv.Itoa(idl)+" ", "", "", "", "")
 		}
 
 		if iow > 10 {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(iow)))+strconv.Itoa(iow), red, "", "", "y")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(iow)))+strconv.Itoa(iow), red, "", "", "y")
 		} else {
-			data_detail += Colorize(strings.Repeat(" ", 3-len(strconv.Itoa(iow)))+strconv.Itoa(iow), green, "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(iow)))+strconv.Itoa(iow), green, "", "", "")
 		}
 		data_detail += Colorize("|", dgreen, "", "", "")
 	}
 
 	//swap
 	if flag_info["swap"] == true {
-		title_summit += Colorize("---swap--- ", dgreen, "", "", "")
-		title_detail += Colorize("   si   so|", dgreen, "", "y", "")
+		title_summit += Colorize("---- swap ----", dgreen, "", "", "")
+		title_detail += Colorize("   si   so   |", dgreen, "", "y", "")
 		if flag_info["interval"] == "1" && count == 0 {
-			data_detail += "00" + Colorize("|", dgreen, "", "", "y")
+			data_detail += "   0     0   " + Colorize("|", dgreen, "", "", "y")
 		} else if flag_info["interval"] == "1" && count > 0 {
 			si := second.swap_in - first.swap_in
 			so := second.swap_out - first.swap_out
@@ -1088,7 +1077,7 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 			si_string := strconv.Itoa(si)
 			so_string := strconv.Itoa(so)
 
-			in := strings.Repeat(" ", 5-len(si_string)) + si_string
+			in := strings.Repeat(" ", 7-len(si_string)) + si_string
 			out := strings.Repeat(" ", 5-len(so_string)) + so_string
 			if si > 0 {
 				data_detail += Colorize(in, red, "", "", "y")
@@ -1107,22 +1096,21 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 	}
 
 	//net
-	//swap
 	if flag_info["net"] != "none" {
-		title_summit += Colorize("----net(B)---- ", dgreen, "", "", "")
-		title_detail += Colorize("   recv   send|", dgreen, "", "y", "")
+		title_summit += Colorize("------ net ------", dgreen, "", "", "")
+		title_detail += Colorize("  recv    send  |", dgreen, "", "y", "")
 		if flag_info["interval"] == "1" && count == 0 {
-			data_detail += "  0  0" + Colorize("|", dgreen, "", "", "y")
+			data_detail += "  0    0  " + Colorize("|", dgreen, "", "", "y")
 		} else if flag_info["interval"] == "1" && count > 0 {
 			net_in := float64(second.net_recv-first.net_recv) / 0.99
 			net_out := float64(second.net_send-first.net_send) / 0.99
 
 			if net_in/1024/1024 >= 1.0 {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(net_in/1024/1024, 1)))+floatToString(net_in/1024/1024, 1)+"m", red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(net_in/1024/1024, 1)))+floatToString(net_in/1024/1024, 1)+"m", red, "", "", "y")
 			} else if net_in/1024 < 1.0 {
 				data_detail += Colorize(strings.Repeat(" ", 7-len(strconv.Itoa(int(net_in))))+strconv.Itoa(int(net_in)), "", "", "", "")
 			} else if net_in/1024/1024 < 1.0 && net_in/1024 >= 1.0 {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(strconv.Itoa(int(net_in)/1024)))+strconv.Itoa(int(net_in)/1024)+"k", "", "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(strconv.Itoa(int(net_in)/1024)))+strconv.Itoa(int(net_in)/1024)+"k", "", "", "", "")
 			}
 
 			if net_out/1024/1024 >= 1.0 {
@@ -1139,10 +1127,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//disk
 	if flag_info["disk"] != "none" {
-		title_summit += Colorize("-------------------------io-usage----------------------- ", dgreen, "", "", "")
-		title_detail += Colorize("   r/sw/srkB/swkB/s  queue await svctm "+"%"+"util|", dgreen, "", "y", "")
+		title_summit += Colorize("--------------------------------- io-usage ---------------------------------", dgreen, "", "", "")
+		title_detail += Colorize("  r/s    w/s    rkb/s    wkb/s    queue    await    svctm    "+"%"+"util"+"|", dgreen, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("0.00.0 0.0  0.0   0.00.0   0.0   0.0|", "", "", "", "")
+			data_detail += Colorize("  0.0      0.0      0.0      0.0      0.0      0.0      0.0      0.0|", "", "", "", "")
 		} else {
 			// fmt.Printf("rs_disk is float64(%d-%d)/0.999\n", second.io_1, first.io_1)
 			rs_disk := float64(second.io_1-first.io_1) / 0.9999
@@ -1171,9 +1159,9 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 			// fmt.Println(rs_disk, ws_disk, rkbs_disk, wkbs_disk, queue_disk, await_disk, svctm_disk, util_disk)
 			// fmt.Println(strings.Repeat(" ", 6-len(floatToString(rs_disk, 1))) + floatToString(rs_disk, 1))
 			if 1 != 1 {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(rs_disk, 1)))+floatToString(rs_disk, 1), red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 9-len(floatToString(rs_disk, 1)))+floatToString(rs_disk, 1), red, "", "", "y")
 			} else {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(rs_disk, 1)))+floatToString(rs_disk, 1), "", "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 9-len(floatToString(rs_disk, 1)))+floatToString(rs_disk, 1), "", "", "", "")
 			}
 
 			if 1 != 1 {
@@ -1183,9 +1171,9 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 			}
 
 			if rkbs_disk > 1024.0 {
-				data_detail += Colorize(strings.Repeat(" ", 9-len(floatToString(rkbs_disk, 1)))+floatToString(rkbs_disk, 1), red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 7-len(floatToString(rkbs_disk, 1)))+floatToString(rkbs_disk, 1), red, "", "", "y")
 			} else {
-				data_detail += Colorize(strings.Repeat(" ", 9-len(floatToString(rkbs_disk, 1)))+floatToString(rkbs_disk, 1), "", "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 7-len(floatToString(rkbs_disk, 1)))+floatToString(rkbs_disk, 1), "", "", "", "")
 			}
 
 			if wkbs_disk > 1024.0 {
@@ -1195,29 +1183,29 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 			}
 
 			if second.io_9 > 10 {
-				data_detail += Colorize(strings.Repeat(" ", 4-len(queue_disk))+queue_disk+".0 ", red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(queue_disk))+queue_disk+".0 ", red, "", "", "y")
 			} else {
-				data_detail += Colorize(strings.Repeat(" ", 4-len(queue_disk))+queue_disk+".0 ", "", "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(queue_disk))+queue_disk+".0 ", "", "", "", "")
 			}
 
 			if await_disk > 5.0 {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(await_disk, 1)))+floatToString(await_disk, 1), red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(await_disk, 1)))+floatToString(await_disk, 1), red, "", "", "y")
 			} else {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(await_disk, 1)))+floatToString(await_disk, 1), green, "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(await_disk, 1)))+floatToString(await_disk, 1), green, "", "", "")
 			}
 
 			if svctm_disk > 5.0 {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(svctm_disk, 1)))+floatToString(svctm_disk, 1), red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(svctm_disk, 1)))+floatToString(svctm_disk, 1), red, "", "", "y")
 			} else {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(svctm_disk, 1)))+floatToString(svctm_disk, 1), "", "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(svctm_disk, 1)))+floatToString(svctm_disk, 1), "", "", "", "")
 			}
 
 			if util_disk > 80.0 {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(util_disk, 1)))+floatToString(util_disk, 1), red, "", "", "y")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(util_disk, 1)))+floatToString(util_disk, 1), red, "", "", "y")
 			} else if util_disk > 100.0 {
 				data_detail += Colorize(" 100.0", green, "", "", "")
 			} else {
-				data_detail += Colorize(strings.Repeat(" ", 6-len(floatToString(util_disk, 1)))+floatToString(util_disk, 1), green, "", "", "")
+				data_detail += Colorize(strings.Repeat(" ", 8-len(floatToString(util_disk, 1)))+floatToString(util_disk, 1), green, "", "", "")
 			}
 
 			data_detail += Colorize("|", dgreen, "", "", "")
@@ -1227,8 +1215,8 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//-com
 	if flag_info["com"] == true {
-		title_summit += Colorize("-QPS- -TPS-", green, blue, "", "")
-		title_detail += Colorize("  ins   upd   delsel   iud|", green, "", "y", "")
+		title_summit += Colorize("-------- QPS/TPS --------", green, blue, "", "")
+		title_detail += Colorize("Sel  Ins  Upd  Del  iud |", green, "", "y", "")
 		if count == 0 {
 			data_detail += Colorize("0 0 0  0 0", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
@@ -1240,21 +1228,21 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 			rollback_diff := (second.Com_rollback - first.Com_rollback) / interval
 			tps := rollback_diff + commit_diff
 
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(select_diff)))+strconv.Itoa(select_diff), yellow, "", "", "")
 			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(insert_diff)))+strconv.Itoa(insert_diff), "", "", "", "")
-			data_detail += Colorize(strings.Repeat(" ", 6-len(strconv.Itoa(update_diff)))+strconv.Itoa(update_diff), "", "", "", "")
-			data_detail += Colorize(strings.Repeat(" ", 6-len(strconv.Itoa(delete_diff)))+strconv.Itoa(delete_diff), "", "", "", "")
-			data_detail += Colorize(strings.Repeat(" ", 7-len(strconv.Itoa(select_diff)))+strconv.Itoa(select_diff), yellow, "", "", "")
-			data_detail += Colorize(strings.Repeat(" ", 6-len(strconv.Itoa(tps)))+strconv.Itoa(tps), yellow, "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(update_diff)))+strconv.Itoa(update_diff), "", "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(delete_diff)))+strconv.Itoa(delete_diff), "", "", "", "")
+			data_detail += Colorize(strings.Repeat(" ", 5-len(strconv.Itoa(tps)))+strconv.Itoa(tps), yellow, "", "", "")
 			data_detail += Colorize("|", green, "", "", "")
 		}
 	}
 
 	//hit
 	if flag_info["hit"] == true {
-		title_summit += Colorize("----KeyBuffer------Index----Qcache---Innodb---(%) ", green, blue, "", "")
-		title_detail += Colorize("  read  writecur  totalhit lorhit|", green, "", "y", "")
+		title_summit += Colorize("---- KeyBuffer -------- Index -------- Qcache ----------- InnoDB ------(%)", green, blue, "", "")
+		title_detail += Colorize("  read  write    indexhit  totalhit   queryhit    readrequest  innodbhit |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("100.00 100.00 100.00 100.00 100.00   0 100.00|", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize("  0.00    0.00      0.00    0.00     0.00      0       0.00 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			read_request := (second.Innodb_buffer_pool_read_requests - first.Innodb_buffer_pool_read_requests) / interval
 			read := (second.Innodb_buffer_pool_reads - first.Innodb_buffer_pool_reads) / interval
@@ -1300,10 +1288,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//innodb_rows
 	if flag_info["innodb_rows"] == true {
-		title_summit += Colorize("---innodb rows status--- ", green, blue, "", "")
-		title_detail += Colorize("  ins   upd   del   read|", green, "", "y", "")
+		title_summit += Colorize("------ InnoDB rows status ------", green, blue, "", "")
+		title_detail += Colorize("  ins     upd     del     read |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("0 0 0  0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0       0       0       0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			innodb_rows_inserted_diff := (second.Innodb_rows_inserted - first.Innodb_rows_inserted) / interval
 			innodb_rows_updated_diff := (second.Innodb_rows_updated - first.Innodb_rows_updated) / interval
@@ -1321,10 +1309,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//innodb_pages
 	if flag_info["innodb_pages"] == true {
-		title_summit += Colorize("---innodb bp pages status-- ", green, blue, "", "")
-		title_detail += Colorize("   data   free  dirty flush|", green, "", "y", "")
+		title_summit += Colorize("---- InnoDB bp pages status ----", green, blue, "", "")
+		title_detail += Colorize("  data   free   dirty   flush  |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("  0  0  0 0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize("  0       0       0       0  ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			flush := (second.Innodb_buffer_pool_pages_flushed - first.Innodb_buffer_pool_pages_flushed) / interval
 
@@ -1339,10 +1327,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//innodb_data
 	if flag_info["innodb_data"] == true {
-		title_summit += Colorize("-----innodb data status----- ", green, blue, "", "")
-		title_detail += Colorize(" reads writes   read written|", green, "", "y", "")
+		title_summit += Colorize("------- InnoDB data status -------", green, blue, "", "")
+		title_detail += Colorize(" reads   writes   read   written |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize(" 0  0  0  0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0       0       0       0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			innodb_data_reads_diff := (second.Innodb_data_reads - first.Innodb_data_reads) / interval
 			innodb_data_writes_diff := (second.Innodb_data_writes - first.Innodb_data_writes) / interval
@@ -1378,10 +1366,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//innodb_log
 	if flag_info["innodb_log"] == true {
-		title_summit += Colorize("--innodb log-- ", green, blue, "", "")
-		title_detail += Colorize("fsyncs written|", green, "", "y", "")
+		title_summit += Colorize("--- InnoDB log ---", green, blue, "", "")
+		title_detail += Colorize(" fsyncs  written |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize(" 0   0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0      0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 
 			innodb_os_log_fsyncs_diff := (second.Innodb_os_log_fsyncs - first.Innodb_os_log_fsyncs) / interval
@@ -1403,10 +1391,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//innodb_status
 	if flag_info["innodb_status"] == true {
-		title_summit += Colorize("  his --log(byte)--  read ---query--- ", green, blue, "", "")
-		title_detail += Colorize(" list uflush  uckpt  view inside  que|", green, "", "y", "")
+		title_summit += Colorize("----- his - log(byte) - read - query ----", green, blue, "", "")
+		title_detail += Colorize(" list  uflush  uckpt  view  inside  que |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("0  0  0 0 0 0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0    0     0    0    0    0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 
 			//mysql --innodb_status show engine innodb status
@@ -1457,10 +1445,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//threads ------threads------
 	if flag_info["threads"] == true {
-		title_summit += Colorize("----------threads--------- ", green, blue, "", "")
-		title_detail += Colorize(" run  con  cre  cac   "+"%"+"hit|", green, "", "y", "")
+		title_summit += Colorize("------------ threads -----------", green, blue, "", "")
+		title_detail += Colorize(" run   con   cre   cac   "+"%"+"hit |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("   0000 0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0     0     0     0     0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			connections_dirr := (second.Connections - first.Connections) / interval
 
@@ -1489,10 +1477,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//bytes
 	if flag_info["bytes"] == true {
-		title_summit += Colorize("-----bytes---- ", green, blue, "", "")
-		title_detail += Colorize("   recv   send|", green, "", "y", "")
+		title_summit += Colorize("--- bytes ---", green, blue, "", "")
+		title_detail += Colorize(" recv  send |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("  0  0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0  0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 
 			bytes_received_diff := (second.Bytes_received - first.Bytes_received) / interval
@@ -1520,10 +1508,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//semi
 	if flag_info["semi"] == true {
-		title_summit += Colorize("---avg_wait--tx_times--semi ", green, blue, "", "")
-		title_detail += Colorize("  nettx   no  yes   off|", green, "", "y", "")
+		title_summit += Colorize("--- avg_wait - tx_times - semi ---", green, blue, "", "")
+		title_detail += Colorize(" netat  txat  notx  yestx  notms |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize("100ms 100ms 1000 1000  1000", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0.00ms  0.00ms  1000  1000  1000 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			// fmt.Printf("1 %d 2 %d 3 %d 4 %d 5 %d", second.Rpl_semi_sync_master_net_avg_wait_time, second.Rpl_semi_sync_master_tx_avg_wait_time, second.Rpl_semi_sync_master_no_tx, second.Rpl_semi_sync_master_yes_tx, second.Rpl_semi_sync_master_no_times)
 			if second.Rpl_semi_sync_master_net_avg_wait_time < 1000 {
@@ -1561,10 +1549,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 
 	//threads ------threads------
 	if flag_info["slave"] == true {
-		title_summit += Colorize("---------------SlaveStatus------------- ", green, blue, "", "")
-		title_detail += Colorize("ReadMLP ExecMLP   chkRE   SecBM|", green, "", "y", "")
+		title_summit += Colorize("----------- Slave Status --------", green, blue, "", "")
+		title_detail += Colorize(" ReadMLP  ExecMLP  chkRE  SecBM |", green, "", "y", "")
 		if count == 0 {
-			data_detail += Colorize(" 1066312331  1066312331 6312331 6312331", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail += Colorize(" 0       0        0      0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 
 			checkNum := second.Read_Master_Log_Pos - second.Exec_Master_Log_Pos
@@ -1592,10 +1580,10 @@ func gotNumber(flag_info map[string]interface{}, first basic, second basic, coun
 		// 1,000,000,000 皮秒 = 1毫秒
 		// 1,000,000,000,000 皮秒 = 1秒
 		var rt_count, rt_avg, rt_95avg, rt_99avg string
-		title_summit += Colorize("--------tcprstat(us)-------- ", green, blue, "", "") + " "
-		title_detail += Colorize("  countavg 95-avg 99-avg|", green, "", "y", "")
+		title_summit += Colorize("-------- tcprstat(us) -------", green, blue, "", "") + " "
+		title_detail += Colorize(" count  avg  95-avg  99-avg |", green, "", "y", "")
 		if count == 0 {
-			data_detail = Colorize("  0  0  0  0", "", "", "", "") + Colorize("|", green, "", "", "")
+			data_detail = Colorize(" 0      0      0      0 ", "", "", "", "") + Colorize("|", green, "", "", "")
 		} else {
 			if second.rt_count > 1000 {
 				rt_count = Colorize(strings.Repeat(" ", 7-len(strconv.Itoa(second.rt_count)))+strconv.Itoa(second.rt_count), red, "", "", "")

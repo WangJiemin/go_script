@@ -1675,7 +1675,7 @@ func main() {
 	go func() {
 		select {
 		case s := <-c:
-			fmt.Printf("\n\033[1;4;31m%s:罒灬罒:小伙子走了哟！\033[0m\n", s)
+			fmt.Printf("\n\033[1;4;31m%s:罒灬罒:撒 哟 娜 拉！\033[0m\n", s)
 			execCommand("killall tcprstat")
 			//不写就退不出来了
 			os.Exit(1)

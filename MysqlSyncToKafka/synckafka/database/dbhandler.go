@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 
-	"golang_Learn/synckafka/datetime"
+	"synckafka/datetime"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"

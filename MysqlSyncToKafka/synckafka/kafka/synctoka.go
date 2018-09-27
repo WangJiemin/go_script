@@ -2,7 +2,7 @@ package kafka
 
 import (
 	"fmt"
-	"golang_Learn/synckafka/database"
+	"synckafka/database"
 	//"os"
 	"strings"
 	//"sync"

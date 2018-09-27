@@ -1,8 +1,8 @@
-db_user = jiemin
-db_pwd = jiemin
-db_host = 127.0.01
+db_user = funbird
+db_pwd = funbird2017
+db_host = 192.168.95.186
 db_port = 3306
-db_name = jiemin
-ka_host = 127.0.0.1:9092,127.0.0.1:9092,127.0.0.1:9092
-//ka_host = 127.0.0.1:9092
-ka_topic = test
+db_name = funbird_storage
+ka_host = 117.107.241.71:9092,117.107.241.72:9092,117.107.241.73:9092
+//ka_host = 117.107.241.71:9092
+ka_topic = spider_news_data

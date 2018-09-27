@@ -1,8 +1,8 @@
 package main
 
 import (
-	db "golang_Learn/synckafka/database"
-	ka "golang_Learn/synckafka/kafka"
+	db "synckafka/database"
+	ka "synckafka/kafka"
 
 	"github.com/WangJiemin/gocomm"
 )

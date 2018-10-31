@@ -1,0 +1,13 @@
+sshuser = root
+sshpass = allstar!
+sshhost = 192.168.181.124
+sshport = 22
+
+xtrabackupuser = funbird
+xtrabackuppass = funbird2017
+xtrabackuphost = 192.168.181.124
+xtrabackupport = 3306
+xtrabackupconfig = /data/mysqldb_3306/etc/my.cnf
+xtrabackuptmpdir = /tmp
+xtrabackupbackupdir = /data/backup
+xtrabackupcommand = innobackupex

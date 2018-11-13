@@ -1,0 +1,14 @@
+mysql:
+  user: jiemin
+  password: jiemin
+  host: 127.0.0.1
+  port: 3306
+  dbname: test
+ptquerydigest:
+  enable: true
+  logpath: /home/jiemin
+  slowname: slow.log
+  values:
+    orderby: max
+    limit: 10
+    filter: '$event->{arg} =~ m/^select/i'

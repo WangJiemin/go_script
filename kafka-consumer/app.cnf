@@ -1,0 +1,2 @@
+ka_host = 10.10.169.70:9092
+ka_topic = spider_news_data

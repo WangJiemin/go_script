@@ -1,0 +1,30 @@
+wechat:
+  agentid: appid
+  color: FFE61A1A
+  corpid: dingd123465865
+  corpsecret: zC5Jbed9S
+  touser: '@all'
+dingding:
+  agentid: appid
+  color: FFE61A1A
+  corpid: dingd123465865
+  corpsecret: zC5Jbed9S
+email:
+  toemail: 27866701@qq.com
+  fromemail: 278667010@qq.com
+  emailsubject: Analysis of slowlog
+mysql:
+  user: funbird
+  password: funbird2017
+  host: 192.168.181.124
+  port: 3306
+  dbname: funbird
+ptquerydigest:
+  enable: true
+  ptcommand: pt-query-digest
+  logpath: /home/jiemin
+  slowname: slow.log
+  values:
+    orderby: Query_time:sum
+    limit: 10
+    filter: '$event->{arg} =~ m/^select/i'

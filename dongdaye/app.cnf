@@ -1,0 +1,7 @@
+db_host =
+db_user =
+db_pwd =
+db_name =
+db_port =
+minid = 0
+maxid = 5000000

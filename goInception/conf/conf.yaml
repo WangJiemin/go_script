@@ -1,0 +1,13 @@
+inc:
+  user: root
+  host: 192.168.172.104
+  port: 6666
+  db: dinfo_weibo
+remote:
+  user: funbird
+  password: funbird2017
+  host: 192.168.181.124
+  port: 3306
+  db: dinfo_weibo
+  dbtable: weibo_comments
+  sqlformat:

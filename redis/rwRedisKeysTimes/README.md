@@ -46,7 +46,7 @@ db-pre-master ~ #
 ```
 
 ## 截图
-![]()
-![]()
-![]()
+![](https://github.com/WangJiemin/go_script/blob/master/redis/rwRedisKeysTimes/image/WechatIMG858.png)
+![](https://github.com/WangJiemin/go_script/blob/master/redis/rwRedisKeysTimes/image/WechatIMG859.png)
+![](https://github.com/WangJiemin/go_script/blob/master/redis/rwRedisKeysTimes/image/WechatIMG860.png)
 

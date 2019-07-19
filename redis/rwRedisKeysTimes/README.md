@@ -16,6 +16,7 @@ go run rwRedisKeysTimes.go
 go get -u github.com/go-redis/redis
 ```
 
+## 帮助
 ```bash
 db-pre-master ~ # /usr/local/bin/rwRedisKeysTimes -h
 flag needs an argument: -h

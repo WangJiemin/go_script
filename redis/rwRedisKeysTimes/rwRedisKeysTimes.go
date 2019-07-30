@@ -205,7 +205,7 @@ func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total i
 		//if err != nil {
 		//	log.Fatalln("Redis SET Key failed. ERROR: ", err)
 		//}
-		if timedate == 0 {
+		if timedate == 30 {
 			timedate = time.Second * timedate
 			err := clientCluster.Set(strValuesnum, strValues, timedate).Err()
 			if err != nil {
@@ -302,7 +302,7 @@ func RedisClientReadWirterKeysTimes(client *redis.Client, total int, timedate ti
 		//if err != nil {
 		//	log.Fatalln("Redis SET Key failed. ERROR: ", err)
 		//}
-		if timedate == 0 {
+		if timedate == 30 {
 			timedate = time.Second * timedate
 			err := client.Set(strValuesnum, strValues, timedate).Err()
 			if err != nil {

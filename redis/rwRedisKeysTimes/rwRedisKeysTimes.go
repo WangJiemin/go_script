@@ -33,9 +33,10 @@ type RedisConfCmd struct {
 	db   int
 	host string
 	//port  []string
-	pass  string
-	mode  string
-	total int
+	pass     string
+	mode     string
+	timedate time.Duration
+	total    int
 }
 
 // 时间种子
@@ -56,7 +57,8 @@ func (this *RedisConfCmd) ParseCmdOptions() () {
 	flag.IntVar(&this.db, "d", 0, "Redis databases. default: 0")
 	flag.StringVar(&this.host, "h", "127.0.0.1:6379", "Redis address and port. default: 127.0.0.1:6379")
 	flag.StringVar(&this.pass, "p", "", "Redis password. default: \"\"")
-	flag.IntVar(&this.total, "t", 10, "Redis Keys number. default: 10")
+	flag.DurationVar(&this.timedate, "t", 30, "Redis keys expiration time. default: 30s")
+	flag.IntVar(&this.total, "k", 10, "Redis Keys number. default: 10")
 	flag.StringVar(&this.mode, "m", "cluster", "Redis models. options: client/cluster. default: cluster")
 
 	flag.Parse()
@@ -72,12 +74,12 @@ func (this *RedisConfCmd) ParseCmdOptions() () {
 
 	if this.mode == "cluster" {
 		RedisClusterConnentBaseStr(this)
-		RedisClusterReadWirterKeysTimes(clientcluster, this.total)
+		RedisClusterReadWirterKeysTimes(clientcluster, this.total, this.timedate)
 		time.Sleep(time.Second * 2)
 		fmt.Printf("Redis %s 测试完成!\n", "Cluster")
 	} else {
 		RedisConnentBaseSrt(this)
-		RedisClientReadWirterKeysTimes(client, this.total)
+		RedisClientReadWirterKeysTimes(client, this.total, this.timedate)
 		time.Sleep(time.Second * 2)
 		fmt.Printf("Redis %s 测试完成!\n", "Master/Slave")
 	}
@@ -180,33 +182,46 @@ func GetSystemHomeNameAndAdderss() (hostname string, address string) {
 	return hostname, address
 }
 
-func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total int) () {
+func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total int, timedate time.Duration) () {
 	var (
-		setavg float32
-		setmin float32
-		setmax float32
-		setsum float32
+		setavg float64
+		setmin float64
+		setmax float64
+		setsum float64
 
-		getavg float32
-		getmin float32
-		getmax float32
-		getsum float32
+		getavg float64
+		getmin float64
+		getmax float64
+		getsum float64
 	)
-	settotaltime := make(map[int]float32)
-	gettotaltime := make(map[int]float32)
+	settotaltime := make(map[int]float64)
+	gettotaltime := make(map[int]float64)
 
 	for i := 0; i < total; i++ {
 		strValues := RandString(8)
 		strValuesnum := strValues + "_" + strconv.Itoa(i)
 		setsetStart := time.Now()
-		err := clientCluster.Set(strValuesnum, strValues, 30*time.Second).Err()
-		if err != nil {
-			log.Fatalln("Redis SET Key failed. ERROR: ", err)
+		//err := clientCluster.Set(strValuesnum, strValues, 30*time.Second).Err()
+		//if err != nil {
+		//	log.Fatalln("Redis SET Key failed. ERROR: ", err)
+		//}
+		if timedate == 0 {
+			timedate = time.Second * timedate
+			err := clientCluster.Set(strValuesnum, strValues, timedate).Err()
+			if err != nil {
+				log.Fatalln("Redis SET Key failed. ERROR: ", err)
+			}
+		} else {
+			err := clientCluster.Set(strValuesnum, strValues, timedate).Err()
+			if err != nil {
+				log.Fatalln("Redis SET Key failed. ERROR: ", err)
+			}
 		}
+
 		setsetEnd := time.Now()
 		setsubtime := setsetEnd.Sub(setsetStart)
-		settotaltime[i] = float32(setsubtime.Seconds() * 1000)
-		//settotaltime[i] = float32(setsubtime.Nanoseconds() / 1000 / 1000)
+		settotaltime[i] = float64(setsubtime.Seconds() * 1000)
+		//settotaltime[i] = float64(setsubtime.Nanoseconds() / 1000 / 1000)
 
 		getsetStart := time.Now()
 		val, err := clientCluster.Get(strValuesnum).Result()
@@ -215,8 +230,8 @@ func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total i
 		}
 		getsetEnd := time.Now()
 		getsubtime := getsetEnd.Sub(getsetStart)
-		gettotaltime[i] = float32(getsubtime.Seconds() * 1000)
-		//gettotaltime[i] = float32(getsubtime.Nanoseconds() / 1000 / 1000)
+		gettotaltime[i] = float64(getsubtime.Seconds() * 1000)
+		//gettotaltime[i] = float64(getsubtime.Nanoseconds() / 1000 / 1000)
 		fmt.Printf("Redis Keys:\t%s,\tRedis values:\t%s\n", strValuesnum, val)
 	}
 
@@ -237,7 +252,7 @@ func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total i
 			setmin = v
 		}
 	}
-	setavg = setsum / float32(len(settotaltime))
+	setavg = setsum / float64(len(settotaltime))
 
 	// get keys times
 	for _, v := range gettotaltime {
@@ -256,7 +271,7 @@ func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total i
 			getmin = v
 		}
 	}
-	getavg = getsum / float32(len(gettotaltime))
+	getavg = getsum / float64(len(gettotaltime))
 
 	fmt.Printf("\nCOMMENT: %d keys\n\n", total)
 	fmt.Printf("Performance:\n\tREAD MAX:\t%3.f ms\n\tREAD MIN:\t%3.f ms\n\tREAD AVG:\t%3.f ms\n\t\n\tSET MAX:\t%3.f ms\n\tSET MIN:\t%3.f ms\n\tSET AVG:\t%3.f ms\n\tTOTAL:\n\tREAD SUM:\t%3.f ms\n\tSET SUM:\t%3.f ms\n",
@@ -264,33 +279,45 @@ func RedisClusterReadWirterKeysTimes(clientCluster *redis.ClusterClient, total i
 
 }
 
-func RedisClientReadWirterKeysTimes(client *redis.Client, total int) () {
+func RedisClientReadWirterKeysTimes(client *redis.Client, total int, timedate time.Duration) () {
 	var (
-		setavg float32
-		setmin float32
-		setmax float32
-		setsum float32
+		setavg float64
+		setmin float64
+		setmax float64
+		setsum float64
 
-		getavg float32
-		getmin float32
-		getmax float32
-		getsum float32
+		getavg float64
+		getmin float64
+		getmax float64
+		getsum float64
 	)
-	settotaltime := make(map[int]float32)
-	gettotaltime := make(map[int]float32)
+	settotaltime := make(map[int]float64)
+	gettotaltime := make(map[int]float64)
 
 	for i := 0; i < total; i++ {
 		strValues := RandString(8)
 		strValuesnum := strValues + "_" + strconv.Itoa(i)
 		setsetStart := time.Now()
-		err := client.Set(strValuesnum, strValues, 30*time.Second).Err()
-		if err != nil {
-			log.Fatalln("Redis SET Key failed. ERROR: ", err)
+		//err := client.Set(strValuesnum, strValues, 30*time.Second).Err()
+		//if err != nil {
+		//	log.Fatalln("Redis SET Key failed. ERROR: ", err)
+		//}
+		if timedate == 0 {
+			timedate = time.Second * 30
+			err := client.Set(strValuesnum, strValues, timedate).Err()
+			if err != nil {
+				log.Fatalln("Redis SET Key failed. ERROR: ", err)
+			}
+		} else {
+			err := client.Set(strValuesnum, strValues, timedate).Err()
+			if err != nil {
+				log.Fatalln("Redis SET Key failed. ERROR: ", err)
+			}
 		}
 		setsetEnd := time.Now()
 		setsubtime := setsetEnd.Sub(setsetStart)
-		//settotaltime[i] = float32(setsubtime.Seconds() * 1000)
-		settotaltime[i] = float32(setsubtime.Nanoseconds() / 1000 / 1000)
+		settotaltime[i] = float64(setsubtime.Seconds() * 1000)
+		//settotaltime[i] = float64(setsubtime.Nanoseconds() / 1000 / 1000)
 
 		getsetStart := time.Now()
 		val, err := client.Get(strValuesnum).Result()
@@ -299,8 +326,8 @@ func RedisClientReadWirterKeysTimes(client *redis.Client, total int) () {
 		}
 		getsetEnd := time.Now()
 		getsubtime := getsetEnd.Sub(getsetStart)
-		//gettotaltime[i] = float32(getsubtime.Seconds() * 1000)
-		gettotaltime[i] = float32(getsubtime.Nanoseconds() / 1000 / 1000)
+		gettotaltime[i] = float64(getsubtime.Seconds() * 1000)
+		//gettotaltime[i] = float64(getsubtime.Nanoseconds() / 1000 / 1000)
 		fmt.Printf("Redis Keys:\t%s,\tRedis values:\t%s\n", strValuesnum, val)
 	}
 
@@ -321,7 +348,7 @@ func RedisClientReadWirterKeysTimes(client *redis.Client, total int) () {
 			setmin = v
 		}
 	}
-	setavg = setsum / float32(len(settotaltime))
+	setavg = setsum / float64(len(settotaltime))
 
 	// get keys times
 	for _, v := range gettotaltime {
@@ -340,7 +367,7 @@ func RedisClientReadWirterKeysTimes(client *redis.Client, total int) () {
 			getmin = v
 		}
 	}
-	getavg = getsum / float32(len(gettotaltime))
+	getavg = getsum / float64(len(gettotaltime))
 
 	fmt.Printf("\nCOMMENT: %d keys\n\n", total)
 	fmt.Printf("Performance:\n\tREAD MAX:\t%3.f ms\n\tREAD MIN:\t%3.f ms\n\tREAD AVG:\t%3.f ms\n\t\n\tSET MAX:\t%3.f ms\n\tSET MIN:\t%3.f ms\n\tSET AVG:\t%3.f ms\n\tTOTAL:\n\tREAD SUM:\t%3.f ms\n\tSET SUM:\t%3.f ms\n",

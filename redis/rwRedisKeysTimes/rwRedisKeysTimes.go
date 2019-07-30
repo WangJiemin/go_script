@@ -303,7 +303,7 @@ func RedisClientReadWirterKeysTimes(client *redis.Client, total int, timedate ti
 		//	log.Fatalln("Redis SET Key failed. ERROR: ", err)
 		//}
 		if timedate == 0 {
-			timedate = time.Second * 30
+			timedate = time.Second * timedate
 			err := client.Set(strValuesnum, strValues, timedate).Err()
 			if err != nil {
 				log.Fatalln("Redis SET Key failed. ERROR: ", err)

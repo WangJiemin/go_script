@@ -16,6 +16,9 @@ go run rwRedisKeysTimes.go
 go get -u github.com/go-redis/redis
 ```
 
+## 下载二进制
+[Download](https://github.com/WangJiemin/go_script/tree/master/redis/rwRedisKeysTimes/releases)
+
 ## 帮助
 ```bash
 db-pre-master ~ # /usr/local/bin/rwRedisKeysTimes -h

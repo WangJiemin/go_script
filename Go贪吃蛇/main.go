@@ -38,7 +38,7 @@ import "C"
 import (
 	"flag"
 	"fmt"
-	//_ "glog-master"
+	//_ "glog-main"
 	"math/rand"
 	"os"
 	"time"
